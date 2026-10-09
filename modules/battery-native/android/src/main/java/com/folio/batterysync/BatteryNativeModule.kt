@@ -19,6 +19,11 @@ class BatteryNativeModule : Module() {
     override fun definition() = ModuleDefinition {
         Name("BatteryNative")
         Events("onState")
+        View(BatteryDashboardView::class) {
+            Events("onAction")
+            Prop("model") { view: BatteryDashboardView, model: DashboardModel -> view.model = model }
+            Prop("labels") { view: BatteryDashboardView, labels: Map<String, String> -> view.labels = labels }
+        }
         OnCreate { BatteryState.observers.add(observer) }
         OnDestroy { BatteryState.observers.remove(observer) }
         OnActivityEntersForeground {
@@ -71,6 +76,8 @@ class BatteryNativeModule : Module() {
         Function("diagnostics") {
             JSONObject(BatteryState.snapshot()).apply {
                 remove("wearableName")
+                remove("phoneName")
+                remove("computerDevices")
                 put("appVersion", "0.1.0")
                 put("deviceModel", Build.MODEL)
                 put("androidVersion", Build.VERSION.RELEASE)

@@ -28,12 +28,19 @@ final class BatteryModel: ObservableObject {
 
     private func refresh() async {
         do {
-            let snapshot = try await Task.detached { try USBReceiver().read() }.value
+            let (snapshot, computerSynced) = try await Task.detached {
+                let receiver = try USBReceiver()
+                let snapshot = try receiver.read()
+                do {
+                    try receiver.sendComputerBatteries(ComputerBattery.readConnected())
+                    return (snapshot, true)
+                } catch { return (snapshot, false) }
+            }.value
             guard !Task.isCancelled else { return }
             let updated = snapshot.records(phoneName: Catalog.text("batterySync.phone"), wearableName: Catalog.text("batterySync.wearable"))
             try publisher.update(updated)
             records = updated
-            status = "batterySync.mac.connected"
+            status = computerSynced ? "batterySync.mac.connected" : "batterySync.mac.partial"
         } catch {
             guard !Task.isCancelled else { return }
             publisher.withdrawAll()

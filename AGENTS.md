@@ -1,6 +1,7 @@
 # Project Rules
 
 - Keep Android on React Native and Expo, the wearable on Xiaomi Vela, and macOS on native SwiftUI.
+- Build Android UI with native Miuix Compose components hosted by the Expo module; keep actions and permissions in the React Native layer.
 - Use pnpm and pinned dependencies. Do not add frameworks without an explicit need.
 - Keep user-facing text in the shared `locales/` catalog, with Chinese and English support.
 - Use concise Chinese code comments. Keep internal diagnostics out of product UI.

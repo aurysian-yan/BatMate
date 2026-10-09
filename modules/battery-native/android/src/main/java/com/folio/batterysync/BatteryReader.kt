@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.os.Bundle
+import android.provider.Settings
 import com.xiaomi.xms.wearable.Status
 import com.xiaomi.xms.wearable.Wearable
 import com.xiaomi.xms.wearable.auth.Permission
@@ -253,6 +254,8 @@ internal class BatteryReader private constructor(private val context: Context) {
     private fun invalidate() { generation++; finish() }
 
     private fun updatePhone(intent: Intent?) {
+        BatteryState.phoneName = runCatching { Settings.Global.getString(context.contentResolver, "device_name") }
+            .getOrNull()?.trim()?.takeIf { it.isNotEmpty() } ?: Build.MODEL
         val level = intent?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) ?: -1
         val scale = intent?.getIntExtra(BatteryManager.EXTRA_SCALE, -1) ?: -1
         BatteryState.phoneLevel = BatteryValues.percentage(level, scale)

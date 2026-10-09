@@ -1,4 +1,5 @@
 {
   "platforms": ["android"],
+  "coreFeatures": ["compose"],
   "android": { "modules": ["com.folio.batterysync.BatteryNativeModule"] }
 }

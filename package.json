@@ -17,7 +17,6 @@
     "test:macos": "python3 scripts/prepare-macos.py && swift test --package-path macos"
   },
   "dependencies": {
-    "@expo/ui": "57.0.21",
     "expo": "57.0.26",
     "expo-build-properties": "57.0.22",
     "expo-localization": "57.0.2",

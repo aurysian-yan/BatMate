@@ -49,12 +49,38 @@
       "systemUnavailable": "暂时无法同步到系统电池",
       "refresh": "立即同步",
       "quit": "退出电伴",
-      "usbHint": "使用数据线连接手机，并保持电伴的后台读取开启"
+      "usbHint": "使用数据线连接手机，并保持电伴的后台读取开启",
+      "partial": "正在同步手机电量，暂时无法回传 Mac 电量"
+    },
+    "ui": {
+      "devices": "设备电量",
+      "sync": "同步",
+      "connections": "连接与权限",
+      "computerDevices": "Mac 与配件",
+      "computerWaiting": "用数据线连接 Mac，并打开 Mac 上的电伴",
+      "computerEmpty": "Mac 暂无可同步的电池",
+      "authorizationHint": "允许读取手环的电量与充电状态",
+      "settingsHint": "管理通知、附近设备与后台运行权限",
+      "shareHint": "导出连接状态，帮助排查同步问题",
+      "reading": "正在读取…",
+      "lastReadValue": "上次读取 {{time}}",
+      "unknownLevel": "—",
+      "deviceTypes": {
+        "keyboard": "键盘",
+        "mouse": "鼠标",
+        "trackpad": "触控板",
+        "headphones": "耳机",
+        "speaker": "扬声器",
+        "controller": "游戏手柄",
+        "accessory": "蓝牙配件",
+        "computer": "Mac"
+      }
     }
   },
   "common": {
     "unknown": "未知",
     "operationFailed": "无法完成操作",
-    "openSettings": "打开设置"
+    "openSettings": "打开设置",
+    "dismiss": "知道了"
   }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-// 首版复用当前 USB 调试连接，只读取电量服务，不接管手环连接。
+// 通过 USB 双向同步电量，不接管手环连接。
 public final class USBReceiver {
     private let adb: URL
 
@@ -15,11 +15,23 @@ public final class USBReceiver {
     }
 
     public func read() throws -> BatterySnapshot {
+        let output = try run(["-d", "shell", "dumpsys", "activity", "service",
+                              "com.folio.batterysync.probe/com.folio.batterysync.BatteryMonitorService", "--device-names"])
+        return try BatterySnapshot.decodeServiceOutput(output)
+    }
+
+    public func sendComputerBatteries(_ devices: [ComputerBattery]) throws {
+        let output = try run(["-d", "shell", "content", "call", "--uri",
+                              "content://com.folio.batterysync.probe.computer-batteries", "--method", "sync",
+                              "--arg", try ComputerBattery.payload(devices)])
+        guard output.contains("accepted=\(devices.count)") else { throw ReceiverError.invalidResponse }
+    }
+
+    private func run(_ arguments: [String]) throws -> String {
         let process = Process()
         let output = Pipe()
         process.executableURL = adb
-        process.arguments = ["-d", "shell", "dumpsys", "activity", "service",
-                             "com.folio.batterysync.probe/com.folio.batterysync.BatteryMonitorService", "--device-names"]
+        process.arguments = arguments
         process.standardOutput = output
         process.standardError = FileHandle.nullDevice
         try process.run()
@@ -31,6 +43,6 @@ public final class USBReceiver {
         guard data.count <= 32_768, let text = String(data: data, encoding: .utf8) else {
             throw ReceiverError.invalidResponse
         }
-        return try BatterySnapshot.decodeServiceOutput(text)
+        return text
     }
 }

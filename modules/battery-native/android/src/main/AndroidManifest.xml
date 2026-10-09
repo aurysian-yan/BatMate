@@ -8,6 +8,9 @@
     <package android:name="com.mi.health" />
   </queries>
   <application android:description="@string/battery_module_description">
+    <provider android:name="com.folio.batterysync.ComputerBatteryProvider"
+      android:authorities="com.folio.batterysync.probe.computer-batteries"
+      android:exported="true" android:permission="android.permission.DUMP" />
     <service android:name="com.folio.batterysync.BatteryMonitorService"
       android:exported="false" android:foregroundServiceType="connectedDevice" />
   </application>

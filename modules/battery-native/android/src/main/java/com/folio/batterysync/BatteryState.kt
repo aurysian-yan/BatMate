@@ -6,6 +6,7 @@ import java.util.concurrent.CopyOnWriteArraySet
 internal object BatteryState {
     var status = "idle"
     var phoneLevel: Int? = null
+    var phoneName: String? = null
     var phoneCharging: Boolean? = null
     var wearableName: String? = null
     var wearableLevel: Int? = null
@@ -20,11 +21,13 @@ internal object BatteryState {
     var wearableAppInstalled: Boolean? = null
     var companionCheckError: String? = null
     var queryStage: String? = null
+    var computerDevices: List<Map<String, Any?>> = emptyList()
+    var computerUpdatedAt: Long? = null
     val observers = CopyOnWriteArraySet<(Map<String, Any?>) -> Unit>()
     @Volatile private var published = currentState()
 
     private fun currentState(): Map<String, Any?> = mapOf(
-        "status" to status, "phoneLevel" to phoneLevel, "phoneCharging" to phoneCharging,
+        "status" to status, "phoneName" to phoneName, "phoneLevel" to phoneLevel, "phoneCharging" to phoneCharging,
         "wearableName" to wearableName, "wearableLevel" to wearableLevel,
         "wearableCharging" to wearableCharging, "updatedAt" to updatedAt,
         "backgroundRunning" to backgroundRunning, "errorCode" to errorCode,
@@ -32,6 +35,7 @@ internal object BatteryState {
         "wearableAppInstalled" to wearableAppInstalled,
         "attemptedAt" to attemptedAt,
         "companionCheckError" to companionCheckError, "queryStage" to queryStage,
+        "computerDevices" to computerDevices, "computerUpdatedAt" to computerUpdatedAt,
     )
 
     fun snapshot(): Map<String, Any?> = published

@@ -49,12 +49,38 @@
       "systemUnavailable": "System battery sync is temporarily unavailable",
       "refresh": "Sync Now",
       "quit": "Quit BatMate",
-      "usbHint": "Connect your phone with a cable and keep background reading enabled in BatMate"
+      "usbHint": "Connect your phone with a cable and keep background reading enabled in BatMate",
+      "partial": "Phone batteries are syncing; Mac battery readings are unavailable"
+    },
+    "ui": {
+      "devices": "Device batteries",
+      "sync": "Sync",
+      "connections": "Connection & permissions",
+      "computerDevices": "Mac & accessories",
+      "computerWaiting": "Connect your Mac with a USB cable and open BatMate on it",
+      "computerEmpty": "No battery readings are available on your Mac",
+      "authorizationHint": "Allow access to your band’s battery and charging status",
+      "settingsHint": "Manage notifications, nearby devices and background access",
+      "shareHint": "Export connection status to troubleshoot syncing",
+      "reading": "Reading…",
+      "lastReadValue": "Last read {{time}}",
+      "unknownLevel": "—",
+      "deviceTypes": {
+        "keyboard": "Keyboard",
+        "mouse": "Mouse",
+        "trackpad": "Trackpad",
+        "headphones": "Headphones",
+        "speaker": "Speaker",
+        "controller": "Game controller",
+        "accessory": "Bluetooth accessory",
+        "computer": "Mac"
+      }
     }
   },
   "common": {
     "unknown": "Unknown",
     "operationFailed": "Couldn't complete the action",
-    "openSettings": "Open Settings"
+    "openSettings": "Open Settings",
+    "dismiss": "Got it"
   }
 }

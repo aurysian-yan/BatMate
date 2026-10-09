@@ -8,3 +8,4 @@ void BMReleaseSource(void *source);
 int BMCountPublishedSources(void);
 int BMCountEligibleSources(void);
 int BMCountSourcesWithGlyph(void);
+CFArrayRef BMCopyComputerSources(void) CF_RETURNS_RETAINED;
