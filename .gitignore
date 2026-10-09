@@ -14,3 +14,5 @@
 *.pem
 *.p12
 *.keystore
+
+/macos/Sources/BatMate/Resources/

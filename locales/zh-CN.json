@@ -38,9 +38,18 @@
       "signatureRejected": "小米运动健康未通过此应用的身份验证",
       "timeout": "读取超时，请重试",
       "unavailable": "暂时无法读取设备状态",
-      "moduleRequired": "请在 LSPosed 中启用电量同步，并选择小米运动健康",
+      "moduleRequired": "请在 LSPosed 中启用电伴，并选择小米运动健康",
       "serviceDisconnected": "与小米运动健康的连接已中断",
       "multipleDevices": "请在小米运动健康中仅连接一台设备"
+    },
+    "mac": {
+      "waiting": "请连接手机并开启后台读取",
+      "connected": "正在同步设备电量",
+      "unavailable": "暂时无法连接手机",
+      "systemUnavailable": "暂时无法同步到系统电池",
+      "refresh": "立即同步",
+      "quit": "退出电伴",
+      "usbHint": "使用数据线连接手机，并保持电伴的后台读取开启"
     }
   },
   "common": {

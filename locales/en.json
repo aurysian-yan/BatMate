@@ -38,9 +38,18 @@
       "signatureRejected": "Mi Fitness could not verify this app's identity",
       "timeout": "Reading timed out. Try again",
       "unavailable": "Device status is temporarily unavailable",
-      "moduleRequired": "Enable Battery Sync in LSPosed and select Mi Fitness",
+      "moduleRequired": "Enable BatMate in LSPosed and select Mi Fitness",
       "serviceDisconnected": "The connection to Mi Fitness was interrupted",
       "multipleDevices": "Keep only one device connected in Mi Fitness"
+    },
+    "mac": {
+      "waiting": "Connect your phone and enable background reading",
+      "connected": "Syncing device batteries",
+      "unavailable": "Phone is temporarily unavailable",
+      "systemUnavailable": "System battery sync is temporarily unavailable",
+      "refresh": "Sync Now",
+      "quit": "Quit BatMate",
+      "usbHint": "Connect your phone with a cable and keep background reading enabled in BatMate"
     }
   },
   "common": {

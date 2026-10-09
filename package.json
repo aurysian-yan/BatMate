@@ -12,7 +12,9 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "node --experimental-strip-types --test src/*.test.ts",
-    "i18n:validate": "node scripts/validate-i18n.mjs"
+    "i18n:validate": "node scripts/validate-i18n.mjs",
+    "build:macos": "python3 scripts/build-macos.py",
+    "test:macos": "python3 scripts/prepare-macos.py && swift test --package-path macos"
   },
   "dependencies": {
     "@expo/ui": "57.0.21",

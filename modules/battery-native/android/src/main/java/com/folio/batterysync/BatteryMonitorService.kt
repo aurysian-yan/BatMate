@@ -9,6 +9,8 @@ import android.content.Intent
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.os.Build
+import android.provider.Settings
 import java.io.FileDescriptor
 import java.io.PrintWriter
 import org.json.JSONObject
@@ -70,9 +72,15 @@ class BatteryMonitorService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? = null
 
-    // 通过系统诊断通道检查后台轮询，不输出设备名称或标识。
+    // USB 接收端显式请求名称；默认诊断仍省略设备名称。
     override fun dump(fd: FileDescriptor, writer: PrintWriter, args: Array<out String>) {
-        writer.println(JSONObject(BatteryState.snapshot().filterKeys { it != "wearableName" }))
+        val includeNames = args.contains("--device-names")
+        val snapshot = JSONObject(BatteryState.snapshot().filterKeys { includeNames || it != "wearableName" })
+        if (includeNames) {
+            val name = Settings.Global.getString(contentResolver, "device_name")?.trim()
+            snapshot.put("phoneName", name?.takeIf { it.isNotEmpty() } ?: Build.MODEL)
+        }
+        writer.println(snapshot)
     }
 
     companion object {
