@@ -74,7 +74,7 @@ class BatteryMonitorService : Service() {
     // USB 接收端显式请求名称；默认诊断仍省略设备名称。
     override fun dump(fd: FileDescriptor, writer: PrintWriter, args: Array<out String>) {
         val includeNames = args.contains("--device-names")
-        val snapshot = JSONObject(BatteryState.snapshot().filterKeys {
+        val snapshot = JSONObject((BatteryState.snapshot() + WirelessSync.get(this).diagnostics()).filterKeys {
             includeNames || it !in setOf("wearableName", "phoneName", "computerDevices")
         })
         writer.println(snapshot)

@@ -27,7 +27,6 @@ info = {
     'CFBundleExecutable': 'BatMate', 'CFBundlePackageType': 'APPL', 'CFBundleShortVersionString': '0.1.0',
     'CFBundleVersion': '1', 'LSMinimumSystemVersion': '13.0', 'LSUIElement': True,
     'NSLocalNetworkUsageDescription': json.loads((project / 'locales/zh-CN.json').read_text())['batterySync']['wireless']['localNetworkHint'],
-    'NSBonjourServices': ['_batmate._tcp'],
     'NSHighResolutionCapable': True, 'CFBundleDevelopmentRegion': 'en',
 }
 for language, folder in [('zh-CN', 'zh-Hans.lproj'), ('en', 'en.lproj')]:

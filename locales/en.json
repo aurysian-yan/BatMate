@@ -102,7 +102,9 @@
         "identityRejected": "Mac identity does not match; check pairing",
         "pairingRequired": "Pairing is no longer valid; forget it and scan again",
         "unavailable": "Wireless connection unavailable",
-        "partial": "Connected; Mac battery readings are unavailable"
+        "partial": "Connected; Mac battery readings are unavailable",
+        "pairingTimeout": "Pairing timed out. Connect both devices to the same local network and scan again.",
+        "connectionFailed": "Cannot reach your Mac. Check the local network connection. Retrying…"
       }
     }
   },

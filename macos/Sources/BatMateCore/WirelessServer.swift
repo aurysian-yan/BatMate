@@ -13,6 +13,7 @@ public final class WirelessServer {
     private var sessions: [UUID: Session] = [:]
     private var active: UUID?
     private var heartbeat: DispatchSourceTimer?
+    private var discovery: LANDiscovery?
     public var onSnapshot: ((BatterySnapshot) -> Void)?
     public var onState: ((String) -> Void)?
     public var onPaired: (() -> Void)?
@@ -33,12 +34,17 @@ public final class WirelessServer {
         let parameters = NWParameters(tls: tls, tcp: NWProtocolTCP.Options())
         parameters.includePeerToPeer = false
         let listener = try NWListener(using: parameters, on: .any)
-        listener.service = NWListener.Service(name: "BatMate-\(identity.id.prefix(8))", type: "_batmate._tcp",
-            txtRecord: NWTXTRecord(["id": identity.id, "v": "1"]))
         listener.stateUpdateHandler = { [weak self, weak listener] state in
             guard let self else { return }
             switch state {
-            case .ready: self.port = listener?.port?.rawValue; self.state(self.authority.peer == nil ? "unpaired" : "waiting")
+            case .ready:
+                self.port = listener?.port?.rawValue
+                if let port = self.port {
+                    self.discovery?.stop()
+                    self.discovery = try? LANDiscovery(queue: self.queue, id: self.identity.id,
+                        fingerprint: self.identity.fingerprint, port: port)
+                }
+                self.state(self.authority.peer == nil ? "unpaired" : "waiting")
             case .failed: self.port = nil; self.state("unavailable")
             default: break
             }
@@ -84,6 +90,7 @@ public final class WirelessServer {
     public func stop() {
         queue.sync {
             heartbeat?.cancel(); heartbeat = nil
+            discovery?.stop(); discovery = nil
             listener?.cancel(); listener = nil; port = nil
             for session in Array(sessions.values) { close(session) }
             authority.cancel()

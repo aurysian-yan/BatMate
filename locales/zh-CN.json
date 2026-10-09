@@ -102,7 +102,9 @@
         "identityRejected": "Mac 身份不匹配，请检查配对信息",
         "pairingRequired": "配对已失效，请解除配对后重新扫码",
         "unavailable": "暂时无法建立无线连接",
-        "partial": "已连接，暂时无法同步 Mac 电量"
+        "partial": "已连接，暂时无法同步 Mac 电量",
+        "pairingTimeout": "配对超时，请确认两端连接同一局域网后重新扫码",
+        "connectionFailed": "无法连接 Mac，请检查局域网连接，正在重试…"
       }
     }
   },
