@@ -19,6 +19,7 @@
   "dependencies": {
     "expo": "57.0.26",
     "expo-build-properties": "57.0.22",
+    "expo-camera": "57.0.6",
     "expo-localization": "57.0.2",
     "expo-modules-core": "57.0.20",
     "expo-system-ui": "57.0.4",

@@ -3,9 +3,12 @@ import type { ViewProps } from 'react-native';
 import type { ComputerBattery } from './battery-state';
 
 export type DashboardAction = 'refresh' | 'authorize' | 'startBackground' | 'stopBackground'
-  | 'openHost' | 'openSettings' | 'share' | 'dismiss';
+  | 'openHost' | 'openSettings' | 'share' | 'dismiss' | 'scan' | 'cancelScan' | 'forgetWireless';
 
 export interface DashboardModel {
+  scanning: boolean;
+  wirelessPaired: boolean;
+  wirelessStatus: string;
   phoneName: string;
   phoneLevel: number | null;
   phoneStatus: string;

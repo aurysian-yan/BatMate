@@ -57,7 +57,7 @@
       "sync": "同步",
       "connections": "连接与权限",
       "computerDevices": "Mac 与配件",
-      "computerWaiting": "用数据线连接 Mac，并打开 Mac 上的电伴",
+      "computerWaiting": "连接 Mac 上的电伴以同步电量",
       "computerEmpty": "Mac 暂无可同步的电池",
       "authorizationHint": "允许读取手环的电量与充电状态",
       "settingsHint": "管理通知、附近设备与后台运行权限",
@@ -74,6 +74,35 @@
         "controller": "游戏手柄",
         "accessory": "蓝牙配件",
         "computer": "Mac"
+      }
+    },
+    "wireless": {
+      "title": "无线同步",
+      "scan": "扫码连接 Mac",
+      "scanHint": "扫描 Mac 上「电伴」显示的配对二维码",
+      "cancel": "取消",
+      "forget": "解除配对",
+      "pair": "连接手机",
+      "pairHint": "打开手机上的电伴，点击「扫码连接 Mac」。请让两台设备连接同一局域网。",
+      "paired": "已配对，正在等待手机同步",
+      "expired": "二维码已过期",
+      "renew": "刷新二维码",
+      "expires": "二维码有效期五分钟",
+      "permissionHint": "请允许相机、附近设备与通知权限，以完成配对和后台同步。",
+      "invalidCode": "无法使用此二维码，请在 Mac 上刷新配对二维码后重试。",
+      "localNetworkHint": "用于在同一局域网内同步手机、穿戴设备与 Mac 的电量。",
+      "status": {
+        "unpaired": "尚未连接 Mac",
+        "waiting": "等待无线连接",
+        "pairing": "正在配对…",
+        "connecting": "正在连接…",
+        "connected": "已通过局域网连接",
+        "reconnecting": "连接已断开，正在重连…",
+        "networkUnavailable": "请连接与 Mac 相同的局域网",
+        "identityRejected": "Mac 身份不匹配，请检查配对信息",
+        "pairingRequired": "配对已失效，请解除配对后重新扫码",
+        "unavailable": "暂时无法建立无线连接",
+        "partial": "已连接，暂时无法同步 Mac 电量"
       }
     }
   },

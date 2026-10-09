@@ -7,6 +7,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -65,6 +68,9 @@ import top.yukonga.miuix.kmp.theme.lightColorScheme
 
 // React 负责状态与操作，Compose 负责 miuix 原生界面。
 class DashboardModel : Record {
+    @Field var scanning: Boolean = false
+    @Field var wirelessPaired: Boolean = false
+    @Field var wirelessStatus: String = ""
     @Field var phoneName: String = ""
     @Field var phoneLevel: Int? = null
     @Field var phoneStatus: String = ""
@@ -103,7 +109,20 @@ class BatteryDashboardView(context: Context, appContext: AppContext) :
     @Composable
     override fun ComposableScope.Content() {
         MiuixTheme(colors = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()) {
-            if (labels.isNotEmpty()) BatteryDashboard(model, labels) { onAction(mapOf("action" to it)) }
+            if (labels.isNotEmpty() && model.scanning) {
+                Column(Modifier.fillMaxSize().statusBarsPadding().navigationBarsPadding()) {
+                    TopAppBar(title = labels["wireless.scan"].orEmpty())
+                    Spacer(Modifier.weight(1f))
+                    Card(Modifier.padding(BasicComponentDefaults.InsideMargin)) {
+                        Column(Modifier.padding(BasicComponentDefaults.InsideMargin)) {
+                            Text(labels["wireless.scanHint"].orEmpty())
+                            Button(onClick = { onAction(mapOf("action" to "cancelScan")) }, modifier = Modifier.fillMaxWidth()) {
+                                Text(labels["wireless.cancel"].orEmpty())
+                            }
+                        }
+                    }
+                }
+            } else if (labels.isNotEmpty()) BatteryDashboard(model, labels) { onAction(mapOf("action" to it)) }
         }
     }
 }
@@ -168,6 +187,15 @@ private fun BatteryDashboard(model: DashboardModel, labels: Map<String, String>,
                             )
                         }
                     }
+                }
+            }
+            item { SmallTitle(label("wireless.title")) }
+            item {
+                Card(Modifier.padding(horizontal = 26.dp)) {
+                    BasicComponent(title = label("wireless.title"), summary = model.wirelessStatus)
+                    SuperArrow(title = label(if (model.wirelessPaired) "wireless.forget" else "wireless.scan"),
+                        enabled = model.controlsEnabled,
+                        onClick = { action(if (model.wirelessPaired) "forgetWireless" else "scan") })
                 }
             }
             item { SmallTitle(label("sync")) }

@@ -20,6 +20,7 @@ const config: ExpoConfig = {
   },
   plugins: [
     'expo-localization',
+    ['expo-camera', { recordAudioAndroid: false, barcodeScannerEnabled: true }],
     ['expo-build-properties', {
       android: { minSdkVersion: 28, compileSdkVersion: 37, targetSdkVersion: 36, buildArchs: ['arm64-v8a'] },
     }],

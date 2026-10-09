@@ -1,6 +1,7 @@
 #import "SystemBatteryBridge.h"
 #import <Foundation/Foundation.h>
 #import <IOKit/ps/IOPowerSources.h>
+#import <IOKit/IOKitLib.h>
 #import <objc/message.h>
 #import <dlfcn.h>
 #import <math.h>
@@ -110,4 +111,25 @@ CFArrayRef BMCopyComputerSources(void) {
     }
     CFRelease(list); CFRelease(info);
     return CFBridgingRetain([devices subarrayWithRange:NSMakeRange(0, MIN(devices.count, 16))]);
+}
+
+// 仅在存在 ADB USB 接口时启动兼容接收，避免无线模式拉起调试服务。
+bool BMHasAndroidUSBDevice(void) {
+    io_iterator_t iterator = IO_OBJECT_NULL;
+    if (IOServiceGetMatchingServices(kIOMainPortDefault, IOServiceMatching("IOUSBHostInterface"), &iterator) != KERN_SUCCESS) return false;
+    bool found = false;
+    io_service_t entry;
+    while ((entry = IOIteratorNext(iterator))) {
+        NSDictionary *properties = nil;
+        CFMutableDictionaryRef values = NULL;
+        if (IORegistryEntryCreateCFProperties(entry, &values, kCFAllocatorDefault, 0) == KERN_SUCCESS) {
+            properties = CFBridgingRelease(values);
+            found = [properties[@"bInterfaceClass"] intValue] == 255 &&
+                [properties[@"bInterfaceSubClass"] intValue] == 66 && [properties[@"bInterfaceProtocol"] intValue] == 1;
+        }
+        IOObjectRelease(entry);
+        if (found) break;
+    }
+    IOObjectRelease(iterator);
+    return found;
 }

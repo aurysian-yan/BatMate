@@ -4,6 +4,8 @@ import type { BatterySnapshot } from './battery-state';
 declare class BatteryNativeModule extends NativeModule<{
   onState: (snapshot: BatterySnapshot) => void;
 }> {
+  pairWireless(code: string): Promise<void>;
+  forgetWireless(): Promise<void>;
   snapshot(): BatterySnapshot;
   refresh(): void;
   authorize(): void;

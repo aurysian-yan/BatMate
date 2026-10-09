@@ -49,6 +49,7 @@ class BatteryMonitorService : Service() {
             BatteryState.publish()
             main.removeCallbacks(poll)
             main.post(poll)
+            WirelessSync.get(this).start()
         } catch (error: Exception) {
             getSharedPreferences(PREFS, MODE_PRIVATE).edit().putBoolean(ENABLED, false).apply()
             BatteryState.backgroundRunning = false
@@ -63,7 +64,7 @@ class BatteryMonitorService : Service() {
         main.removeCallbacks(poll)
         BatteryState.backgroundRunning = false
         val reader = BatteryReader.get(this)
-        if (!reader.foreground) reader.pause()
+        if (!reader.foreground) { reader.pause(); WirelessSync.get(this).stop() }
         BatteryState.publish()
         super.onDestroy()
     }

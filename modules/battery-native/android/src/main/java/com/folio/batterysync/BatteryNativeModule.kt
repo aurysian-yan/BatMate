@@ -9,6 +9,7 @@ import android.os.Build
 import android.provider.Settings
 import expo.modules.interfaces.permissions.Permissions
 import expo.modules.kotlin.Promise
+import expo.modules.kotlin.functions.Queues
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 import org.json.JSONObject
@@ -27,11 +28,15 @@ class BatteryNativeModule : Module() {
         OnCreate { BatteryState.observers.add(observer) }
         OnDestroy { BatteryState.observers.remove(observer) }
         OnActivityEntersForeground {
+            WirelessSync.get(context()).start()
             BatteryReader.get(context()).apply { foreground = true; refresh() }
         }
         OnActivityEntersBackground {
             BatteryReader.get(context()).apply { foreground = false; pause() }
+            if (!BatteryState.backgroundRunning) WirelessSync.get(context()).stop()
         }
+        AsyncFunction("pairWireless") { code: String -> WirelessSync.get(context()).pair(code) }.runOnQueue(Queues.MAIN)
+        AsyncFunction("forgetWireless") { WirelessSync.get(context()).forget() }.runOnQueue(Queues.MAIN)
         Function("snapshot") { BatteryState.snapshot() }
         Function("refresh") { BatteryReader.get(context()).refresh() }
         Function("authorize") { BatteryReader.get(context()).authorize() }

@@ -1,7 +1,9 @@
 import Foundation
+import SystemBatteryBridge
 
 // 通过 USB 双向同步电量，不接管手环连接。
 public final class USBReceiver {
+    public static var isDeviceConnected: Bool { BMHasAndroidUSBDevice() }
     private let adb: URL
 
     public init() throws {

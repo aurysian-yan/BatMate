@@ -9,3 +9,4 @@ int BMCountPublishedSources(void);
 int BMCountEligibleSources(void);
 int BMCountSourcesWithGlyph(void);
 CFArrayRef BMCopyComputerSources(void) CF_RETURNS_RETAINED;
+bool BMHasAndroidUSBDevice(void);

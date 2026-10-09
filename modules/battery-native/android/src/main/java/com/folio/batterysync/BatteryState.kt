@@ -23,6 +23,9 @@ internal object BatteryState {
     var queryStage: String? = null
     var computerDevices: List<Map<String, Any?>> = emptyList()
     var computerUpdatedAt: Long? = null
+    var wirelessStatus = "unpaired"
+    var wirelessPaired = false
+    var wirelessLastSync: Long? = null
     val observers = CopyOnWriteArraySet<(Map<String, Any?>) -> Unit>()
     @Volatile private var published = currentState()
 
@@ -35,6 +38,7 @@ internal object BatteryState {
         "wearableAppInstalled" to wearableAppInstalled,
         "attemptedAt" to attemptedAt,
         "companionCheckError" to companionCheckError, "queryStage" to queryStage,
+        "wirelessStatus" to wirelessStatus, "wirelessPaired" to wirelessPaired, "wirelessLastSync" to wirelessLastSync,
         "computerDevices" to computerDevices, "computerUpdatedAt" to computerUpdatedAt,
     )
 

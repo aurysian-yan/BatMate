@@ -57,7 +57,7 @@
       "sync": "Sync",
       "connections": "Connection & permissions",
       "computerDevices": "Mac & accessories",
-      "computerWaiting": "Connect your Mac with a USB cable and open BatMate on it",
+      "computerWaiting": "Connect to BatMate on your Mac to sync battery levels",
       "computerEmpty": "No battery readings are available on your Mac",
       "authorizationHint": "Allow access to your band’s battery and charging status",
       "settingsHint": "Manage notifications, nearby devices and background access",
@@ -74,6 +74,35 @@
         "controller": "Game controller",
         "accessory": "Bluetooth accessory",
         "computer": "Mac"
+      }
+    },
+    "wireless": {
+      "title": "Wireless sync",
+      "scan": "Scan to connect to Mac",
+      "scanHint": "Scan the pairing QR code displayed in BatMate on your Mac",
+      "cancel": "Cancel",
+      "forget": "Forget pairing",
+      "pair": "Connect phone",
+      "pairHint": "Open BatMate on your phone and select “Scan to connect to Mac”. Connect both devices to the same local network.",
+      "paired": "Paired; waiting for the phone to sync",
+      "expired": "QR code expired",
+      "renew": "Refresh QR code",
+      "expires": "QR code is valid for five minutes",
+      "permissionHint": "Allow camera, nearby devices and notification access for pairing and background sync.",
+      "invalidCode": "Unable to use this QR code. Refresh the pairing code on your Mac and try again.",
+      "localNetworkHint": "Sync battery levels for your phone, wearable and Mac on the same local network.",
+      "status": {
+        "unpaired": "No Mac paired",
+        "waiting": "Waiting for a wireless connection",
+        "pairing": "Pairing…",
+        "connecting": "Connecting…",
+        "connected": "Connected over the local network",
+        "reconnecting": "Disconnected; reconnecting…",
+        "networkUnavailable": "Connect to the same local network as your Mac",
+        "identityRejected": "Mac identity does not match; check pairing",
+        "pairingRequired": "Pairing is no longer valid; forget it and scan again",
+        "unavailable": "Wireless connection unavailable",
+        "partial": "Connected; Mac battery readings are unavailable"
       }
     }
   },

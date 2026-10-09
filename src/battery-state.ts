@@ -21,6 +21,9 @@ export interface BatterySnapshot {
   wearableAppInstalled: boolean | null;
   companionCheckError: string | null;
   queryStage: string | null;
+  wirelessStatus: string;
+  wirelessPaired: boolean;
+  wirelessLastSync: number | null;
   computerDevices: ComputerBattery[];
   computerUpdatedAt: number | null;
 }
@@ -38,6 +41,7 @@ export const initialSnapshot: BatterySnapshot = {
   backgroundRunning: false, errorCode: null, hostPackage: null,
   hostVersion: null, sdkApiLevel: null, wearableAppInstalled: null,
   companionCheckError: null, queryStage: null,
+  wirelessStatus: 'unpaired', wirelessPaired: false, wirelessLastSync: null,
   computerDevices: [], computerUpdatedAt: null,
 };
 

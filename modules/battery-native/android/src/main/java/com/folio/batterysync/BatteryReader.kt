@@ -32,7 +32,7 @@ internal class BatteryReader private constructor(private val context: Context) {
     private var authorizing = false
     private var subscribedNode: String? = null
     private var timeout: Runnable? = null
-    var foreground = true
+    var foreground = false
 
     private val phoneReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) { updatePhone(intent) }
