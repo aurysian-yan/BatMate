@@ -1,0 +1,20 @@
+apply plugin: 'com.android.library'
+apply plugin: 'expo-module-gradle-plugin'
+
+group = 'com.folio.batterysync'
+version = '0.1.0'
+
+android {
+  namespace 'com.folio.batterysync'
+  defaultConfig {
+    minSdkVersion 28
+    versionCode 1
+    versionName '0.1.0'
+  }
+}
+
+dependencies {
+  implementation files('libs/xms-wearable-lib_1.4_release.aar')
+  compileOnly files('libs/libxposed-api-102.0.0.aar')
+  testImplementation 'junit:junit:4.13.2'
+}

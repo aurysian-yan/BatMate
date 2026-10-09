@@ -1,0 +1,12 @@
+{
+  "name": "battery-sync-wearable",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.19.0",
+  "scripts": {
+    "build": "python3 ../scripts/build-wearable.py"
+  },
+  "devDependencies": {
+    "aiot-toolkit": "2.0.5"
+  }
+}

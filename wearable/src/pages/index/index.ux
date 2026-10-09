@@ -1,0 +1,61 @@
+<template>
+  <div class="page">
+    <text>{{ $t('batterySync.title') }}</text>
+    <text>{{ percentage }}</text>
+    <text>{{ $t(chargeKey) }}</text>
+    <text>{{ $t(connectionKey) }}</text>
+    <text>{{ $t('batterySync.lastBackgroundRead') }}</text>
+    <text>{{ backgroundTime }}</text>
+    <input type="button" value="{{ $t('batterySync.refresh') }}" onclick="refresh" />
+  </div>
+</template>
+
+<script>
+export default {
+  private: {
+    percentage: '—',
+    chargeKey: 'batterySync.status.idle',
+    connectionKey: 'batterySync.wearableDisconnected',
+    backgroundTime: '—'
+  },
+
+  onShow() {
+    this.stop()
+    this.listener = state => {
+      this.percentage = state.percentage
+      this.chargeKey = state.chargeKey
+      this.connectionKey = state.connectionKey
+      const date = state.backgroundRead ? new Date(state.backgroundRead) : null
+      this.backgroundTime = date ? [date.getHours(), date.getMinutes(), date.getSeconds()]
+        .map(value => String(value).padStart(2, '0')).join(':') : '—'
+    }
+    this.$app.$def.subscribe(this.listener)
+    this.refresh()
+  },
+
+  onHide() {
+    this.stop()
+  },
+
+  onDestroy() {
+    this.stop()
+  },
+
+  stop() {
+    if (this.listener) this.$app.$def.unsubscribe(this.listener)
+    this.listener = null
+  },
+
+  refresh() {
+    this.$app.$def.refresh()
+  }
+}
+</script>
+
+<style>
+.page {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>

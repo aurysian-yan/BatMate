@@ -1,0 +1,37 @@
+{
+  "name": "batmate",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.19.0",
+  "main": "index.ts",
+  "scripts": {
+    "prepare:android": "python3 scripts/prepare-android.py",
+    "prebuild": "pnpm prepare:android && expo prebuild --platform android --no-install",
+    "build:android": "node scripts/build-android.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "node --experimental-strip-types --test src/*.test.ts",
+    "i18n:validate": "node scripts/validate-i18n.mjs"
+  },
+  "dependencies": {
+    "@expo/ui": "57.0.21",
+    "expo": "57.0.26",
+    "expo-build-properties": "57.0.22",
+    "expo-localization": "57.0.2",
+    "expo-modules-core": "57.0.20",
+    "expo-system-ui": "57.0.4",
+    "i18next": "26.4.2",
+    "react": "19.2.3",
+    "react-i18next": "17.0.15",
+    "react-native": "0.86.3",
+    "react-native-safe-area-context": "5.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.12.3",
+    "@types/react": "19.2.14",
+    "eslint": "9.39.4",
+    "eslint-config-expo": "57.0.2",
+    "typescript": "6.0.3"
+  }
+}

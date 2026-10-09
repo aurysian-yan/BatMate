@@ -1,0 +1,104 @@
+<script>
+import battery from '@system.battery'
+import interconnect from '@system.interconnect'
+import storage from '@system.storage'
+
+export default {
+  onCreate() {
+    this.destroyed = false
+    this.foreground = true
+    this.listeners = []
+    this.snapshot = {
+      percentage: '—',
+      chargeKey: 'batterySync.status.idle',
+      connectionKey: 'batterySync.wearableDisconnected',
+      backgroundRead: null
+    }
+    storage.get({
+      key: 'last-background-read',
+      success: value => {
+        if (this.destroyed) return
+        const timestamp = Number(value)
+        if (Number.isFinite(timestamp) && timestamp > 0) {
+          this.snapshot.backgroundRead = Math.max(this.snapshot.backgroundRead || 0, timestamp)
+          this.publish()
+        }
+      }
+    })
+    this.connection = interconnect.instance()
+    this.connection.onopen = () => this.setConnection(true)
+    this.connection.onclose = this.connection.onerror = () => this.setConnection(false)
+    this.refresh()
+    this.timer = setInterval(() => this.refresh(), 30000)
+  },
+
+  onShow() {
+    this.foreground = true
+  },
+
+  onHide() {
+    this.foreground = false
+  },
+
+  onDestroy() {
+    this.destroyed = true
+    clearInterval(this.timer)
+    this.timer = null
+    this.listeners = []
+    this.connection.onopen = null
+    this.connection.onclose = null
+    this.connection.onerror = null
+  },
+
+  subscribe(listener) {
+    this.listeners.push(listener)
+    listener(this.snapshot)
+  },
+
+  unsubscribe(listener) {
+    this.listeners = this.listeners.filter(current => current !== listener)
+  },
+
+  publish() {
+    if (!this.destroyed) this.listeners.forEach(listener => listener(this.snapshot))
+  },
+
+  setConnection(connected) {
+    if (this.destroyed) return
+    this.snapshot.connectionKey = connected
+      ? 'batterySync.wearableConnected' : 'batterySync.wearableDisconnected'
+    this.publish()
+  },
+
+  refresh() {
+    battery.getStatus({
+      success: data => {
+        if (this.destroyed) return
+        if (!Number.isFinite(data.level) || data.level < 0 || data.level > 1) {
+          this.snapshot.percentage = '—'
+          this.snapshot.chargeKey = 'batterySync.status.unavailable'
+        } else {
+          this.snapshot.percentage = `${Math.round(data.level * 100)}%`
+          this.snapshot.chargeKey = data.charging ? 'batterySync.charging' : 'batterySync.notCharging'
+          // 只记录退到后台后成功完成的读取。
+          if (!this.foreground) {
+            this.snapshot.backgroundRead = Date.now()
+            storage.set({ key: 'last-background-read', value: String(this.snapshot.backgroundRead) })
+          }
+        }
+        this.publish()
+      },
+      fail: () => {
+        if (this.destroyed) return
+        this.snapshot.percentage = '—'
+        this.snapshot.chargeKey = 'batterySync.status.unavailable'
+        this.publish()
+      }
+    })
+    this.connection.getReadyState({
+      success: data => this.setConnection(data.status === 1),
+      fail: () => this.setConnection(false)
+    })
+  }
+}
+</script>

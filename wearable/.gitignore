@@ -1,0 +1,7 @@
+/node_modules/
+/build/
+/dist/
+/sign/
+/src/i18n/
+/src/manifest.json
+/src/common/icon.png

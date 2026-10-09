@@ -1,0 +1,51 @@
+{
+  "batterySync": {
+    "title": "BatMate",
+    "moduleDescription": "Sync device battery from Mi Fitness",
+    "phone": "Phone",
+    "wearable": "Band / Watch",
+    "lastBackgroundRead": "Last background reading",
+    "wearableConnected": "Connected to phone",
+    "wearableDisconnected": "Phone disconnected",
+    "connectionHint": "Keep your device connected to Mi Fitness.",
+    "charging": "Charging",
+    "notCharging": "Not charging",
+    "chargeState": "Charging status",
+    "lastRead": "Last read",
+    "notRead": "Not read yet",
+    "refresh": "Read battery",
+    "authorize": "Authorize device status access",
+    "background": "Background reading",
+    "backgroundActive": "Enabled, reads once a minute",
+    "backgroundInactive": "Disabled",
+    "startBackground": "Enable background reading",
+    "stopBackground": "Disable background reading",
+    "backgroundPermission": "Allow Nearby devices and notifications before enabling background reading.",
+    "openHost": "Open Mi Fitness",
+    "shareStatus": "Share device status",
+    "actionFailed": "Check permissions and the device connection, then try again.",
+    "notificationChannel": "Device batteries",
+    "notificationBody": "Reading device battery through Mi Fitness",
+    "status": {
+      "idle": "Not read yet",
+      "reading": "Reading…",
+      "ready": "Read successfully",
+      "appMissing": "Install Mi Fitness first",
+      "companionMissing": "Install the companion app on your wearable first",
+      "deviceDisconnected": "Connect your device in Mi Fitness",
+      "permissionRequired": "Authorize device status access",
+      "permissionDenied": "Device status access was not granted",
+      "signatureRejected": "Mi Fitness could not verify this app's identity",
+      "timeout": "Reading timed out. Try again",
+      "unavailable": "Device status is temporarily unavailable",
+      "moduleRequired": "Enable Battery Sync in LSPosed and select Mi Fitness",
+      "serviceDisconnected": "The connection to Mi Fitness was interrupted",
+      "multipleDevices": "Keep only one device connected in Mi Fitness"
+    }
+  },
+  "common": {
+    "unknown": "Unknown",
+    "operationFailed": "Couldn't complete the action",
+    "openSettings": "Open Settings"
+  }
+}

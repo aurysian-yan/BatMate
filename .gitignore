@@ -1,0 +1,16 @@
+/node_modules/
+/android/
+/.expo/
+/.build/
+/modules/battery-native/android/build/
+/modules/battery-native/android/libs/
+/modules/battery-native/android/src/main/res/values*/
+
+/.DS_Store
+/macos/.build/
+/macos/build/
+/macos/**/*.xcuserstate
+/macos/**/xcuserdata/
+*.pem
+*.p12
+*.keystore

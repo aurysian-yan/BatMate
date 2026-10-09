@@ -1,0 +1,51 @@
+{
+  "batterySync": {
+    "title": "电伴",
+    "moduleDescription": "同步小米运动健康中的设备电量",
+    "phone": "手机",
+    "wearable": "手环／手表",
+    "lastBackgroundRead": "上次后台读取",
+    "wearableConnected": "已连接手机",
+    "wearableDisconnected": "未连接手机",
+    "connectionHint": "请保持小米运动健康与设备连接。",
+    "charging": "正在充电",
+    "notCharging": "未充电",
+    "chargeState": "充电状态",
+    "lastRead": "上次读取",
+    "notRead": "尚未读取",
+    "refresh": "读取电量",
+    "authorize": "授权读取设备状态",
+    "background": "后台读取",
+    "backgroundActive": "已开启，每分钟读取一次",
+    "backgroundInactive": "已关闭",
+    "startBackground": "开启后台读取",
+    "stopBackground": "关闭后台读取",
+    "backgroundPermission": "请允许附近设备和通知权限后再开启后台读取。",
+    "openHost": "打开小米运动健康",
+    "shareStatus": "分享设备状态",
+    "actionFailed": "请检查权限和设备连接后重试。",
+    "notificationChannel": "设备电量",
+    "notificationBody": "正在通过小米运动健康读取设备电量",
+    "status": {
+      "idle": "尚未读取",
+      "reading": "正在读取…",
+      "ready": "已读取",
+      "appMissing": "请先安装小米运动健康",
+      "companionMissing": "请先安装手环端配套应用",
+      "deviceDisconnected": "请在小米运动健康中连接设备",
+      "permissionRequired": "请授权读取设备状态",
+      "permissionDenied": "未获得设备状态读取权限",
+      "signatureRejected": "小米运动健康未通过此应用的身份验证",
+      "timeout": "读取超时，请重试",
+      "unavailable": "暂时无法读取设备状态",
+      "moduleRequired": "请在 LSPosed 中启用电量同步，并选择小米运动健康",
+      "serviceDisconnected": "与小米运动健康的连接已中断",
+      "multipleDevices": "请在小米运动健康中仅连接一台设备"
+    }
+  },
+  "common": {
+    "unknown": "未知",
+    "operationFailed": "无法完成操作",
+    "openSettings": "打开设置"
+  }
+}
